@@ -1,0 +1,111 @@
+/* ==========================================================================
+   SISTEM OTOMASI SURAT BEBAS PINJAM PUSTAKA KURIKURATORIUM FPMIPA UPI
+   Animations Stylesheet - css/animations.css
+   (Fokus: Fade-in halus sekali saat dimuat, tanpa efek scroll fade-out)
+   ========================================================================== */
+
+/* --- Keyframe Definitions --- */
+
+/* Fade-in lembut & sedikit bergeser ke atas untuk inisialisasi dan ganti step */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade-in murni untuk overlay dan backdrop */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Spinner rotation halus */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Pulse lembut untuk badge status atau indikator aktif */
+@keyframes pulseSubtle {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.82;
+  }
+}
+
+/* Modal pop-in lembut */
+@keyframes modalPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* --- Animation Classes --- */
+
+/* Terapkan fade-in sekali saat pertama kali halaman dibuka */
+.animate-mount {
+  animation: fadeInUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Terapkan saat pergantian step wizard aktif */
+.wizard-step.active {
+  animation: fadeInUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Spinner modern berputar */
+.spinner-modern {
+  animation: spin 0.85s linear infinite;
+}
+
+/* Animasi pulse untuk badge fakultas */
+.badge-faculty {
+  animation: pulseSubtle 3s ease-in-out infinite;
+}
+
+/* Animasi card modal */
+.modal-backdrop.active .modal-card {
+  animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Transisi halus saat tombol dinonaktifkan / aktif */
+.btn {
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+/* Menghormati pengaturan aksesibilitas pengguna (Reduced Motion) */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .spinner-modern {
+    animation: spin 2s linear infinite !important;
+  }
+}

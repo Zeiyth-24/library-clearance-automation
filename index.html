@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>Sistem Otomasi Surat Bebas Pinjam Pustaka - Kurikuratorium FPMIPA UPI</title>
+  <meta name="description" content="Layanan mandiri otomasi penerbitan Surat Keterangan Bebas Pinjam Pustaka Kurikuratorium FPMIPA Universitas Pendidikan Indonesia berbasis QR Code legalitas elektronik.">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+
+  <!-- Google Identity Services (GIS) Client Library -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+
+  <div class="app-wrapper animate-mount">
+    
+    <!-- Header Institusi -->
+    <header class="header-institutional">
+      <div class="brand-logos">
+        <!-- Logo UPI -->
+        <div class="logo-badge" title="Universitas Pendidikan Indonesia">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="22" fill="#DC2626" />
+            <path d="M24 8L34 16V32L24 40L14 32V16L24 8Z" fill="#FFFFFF" />
+            <circle cx="24" cy="24" r="7" fill="#FBBF24" />
+            <path d="M24 19L27 24H21L24 19Z" fill="#DC2626" />
+          </svg>
+        </div>
+        <!-- Logo FPMIPA Kurikuratorium -->
+        <div class="logo-badge" title="Kurikuratorium FPMIPA UPI">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="48" height="48" rx="10" fill="#2563EB"/>
+            <path d="M12 34V16C12 14.8954 12.8954 14 14 14H22C23.1046 14 24 14.8954 24 16V34M24 34V16C24 14.8954 24.8954 14 26 14H34C35.1046 14 36 14.8954 36 16V34M12 34H36M12 34L24 32L36 34" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="header-title-group">
+        <span class="badge-faculty">FPMIPA • Universitas Pendidikan Indonesia</span>
+        <h1 class="main-title">Surat Bebas Pinjam Pustaka</h1>
+        <p class="main-subtitle">Layanan mandiri pengecekan tanggungan dan penerbitan Surat Bebas Pinjam Pustaka Kurikuratorium FPMIPA UPI secara instan dengan verifikasi QR Code elektronik.</p>
+      </div>
+    </header>
+
+    <!-- Stepper Indicator 3-Langkah -->
+    <nav class="stepper-container" aria-label="Tahapan Permohonan">
+      <div class="stepper-track">
+        <div class="stepper-progress" id="stepperProgressBar"></div>
+        
+        <!-- Step 1 Indicator -->
+        <div class="step-item active" id="stepIndicator1">
+          <div class="step-circle" aria-hidden="true">1</div>
+          <span class="step-label">Login Akun UPI</span>
+        </div>
+
+        <!-- Step 2 Indicator -->
+        <div class="step-item" id="stepIndicator2">
+          <div class="step-circle" aria-hidden="true">2</div>
+          <span class="step-label">Data Mahasiswa</span>
+        </div>
+
+        <!-- Step 3 Indicator -->
+        <div class="step-item" id="stepIndicator3">
+          <div class="step-circle" aria-hidden="true">3</div>
+          <span class="step-label">Status & Terbit</span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Wizard Card Container -->
+    <main class="wizard-card">
+      
+      <!-- ========================================== -->
+      <!-- LANGKAH 1: OTENTIKASI AKUN GOOGLE @UPI.EDU -->
+      <!-- ========================================== -->
+      <section class="wizard-step active" id="step1" aria-labelledby="step1Heading">
+        <div class="step-header">
+          <h2 class="step-heading" id="step1Heading">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+            Langkah 1: Masuk dengan Akun UPI
+          </h2>
+          <p class="step-desc">Silakan masuk menggunakan akun Google Workspace resmi Universitas Pendidikan Indonesia (@upi.edu) untuk memverifikasi identitas Anda.</p>
+        </div>
+
+        <div class="auth-box">
+          <div class="auth-icon-wrapper">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          </div>
+
+          <div class="auth-info-card">
+            <div class="auth-info-header">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              Persyaratan Akun
+            </div>
+            <p class="auth-info-body">
+              Hanya akun dengan domain <strong>@upi.edu</strong> yang diizinkan untuk mengakses sistem ini. Email umum seperti @gmail.com atau @yahoo.com otomatis ditolak oleh sistem.
+            </p>
+          </div>
+
+          <!-- GIS Button Container -->
+          <div class="google-btn-container" id="googleSignInContainer">
+            <div id="googleSignInBtn"></div>
+          </div>
+
+          <div class="auth-security-note">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Koneksi terenkripsi & diverifikasi langsung oleh Google Identity Services
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- LANGKAH 2: FORMULIR DATA MAHASISWA FPMIPA -->
+      <!-- ========================================== -->
+      <section class="wizard-step" id="step2" aria-labelledby="step2Heading">
+        <div class="step-header">
+          <h2 class="step-heading" id="step2Heading">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            Langkah 2: Lengkapi Data Akademik
+          </h2>
+          <p class="step-desc">Pastikan Nama, NIM, dan Program Studi sesuai dengan data SIAKAD Anda. Data ini akan tercetak langsung pada surat resmi.</p>
+        </div>
+
+        <!-- Ringkasan Akun Google Mahasiswa -->
+        <div class="user-profile-summary">
+          <div class="profile-info">
+            <div class="profile-avatar" id="userAvatar">U</div>
+            <div class="profile-text">
+              <div class="user-name" id="userNameDisplay">Mahasiswa UPI</div>
+              <div class="user-email" id="userEmailDisplay">mahasiswa@upi.edu</div>
+            </div>
+          </div>
+          <button type="button" class="btn-switch-account" id="btnSwitchAccount">Ganti Akun</button>
+        </div>
+
+        <!-- Form Permohonan -->
+        <form id="requestForm" novalidate>
+          <!-- Nama Lengkap -->
+          <div class="form-group" id="groupNama">
+            <label class="form-label" for="inputNama">
+              Nama Lengkap <span class="required">*</span>
+            </label>
+            <div class="input-wrapper">
+              <span class="input-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </span>
+              <input type="text" id="inputNama" class="form-input" placeholder="Masukkan nama lengkap beserta gelar jika ada" required autocomplete="name">
+            </div>
+            <span class="form-error-msg" id="errorNama">Nama lengkap wajib diisi.</span>
+          </div>
+
+          <!-- Email UPI (Read-Only) -->
+          <div class="form-group">
+            <label class="form-label" for="inputEmail">
+              Email Institusi UPI (@upi.edu)
+            </label>
+            <div class="input-wrapper">
+              <span class="input-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </span>
+              <input type="email" id="inputEmail" class="form-input" readonly>
+            </div>
+            <p class="input-hint">Email terkunci sesuai akun login Google Anda.</p>
+          </div>
+
+          <!-- Program Studi FPMIPA -->
+          <div class="form-group" id="groupProdi">
+            <label class="form-label" for="selectProdi">
+              Program Studi di Lingkungan FPMIPA <span class="required">*</span>
+            </label>
+            <div class="input-wrapper">
+              <span class="input-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+              </span>
+              <select id="selectProdi" class="form-select" required>
+                <option value="" disabled selected>-- Pilih Program Studi --</option>
+                <!-- Opsi diisi otomatis via config.js -->
+              </select>
+            </div>
+            <span class="form-error-msg" id="errorProdi">Silakan pilih program studi Anda.</span>
+          </div>
+
+          <!-- NIM -->
+          <div class="form-group" id="groupNim">
+            <label class="form-label" for="inputNim">
+              Nomor Induk Mahasiswa (NIM) <span class="required">*</span>
+            </label>
+            <div class="input-wrapper">
+              <span class="input-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="8" x2="17" y2="8"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="7" y1="16" x2="13" y2="16"/></svg>
+              </span>
+              <input type="text" id="inputNim" class="form-input" placeholder="Contoh: 2101234" maxlength="15" required autocomplete="off">
+            </div>
+            <p class="input-hint">Ketik angka NIM Anda tanpa spasi atau tanda baca.</p>
+            <span class="form-error-msg" id="errorNim">NIM wajib diisi (minimal 7 karakter alphanumeric).</span>
+          </div>
+
+          <!-- Tombol Submit -->
+          <div style="margin-top: 1.75rem;">
+            <button type="submit" class="btn btn-primary btn-block" id="btnSubmitRequest">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+              Periksa & Terbitkan Surat
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- LANGKAH 3: CARD STATUS HASIL PENERBITAN -->
+      <!-- ========================================== -->
+      <section class="wizard-step" id="step3" aria-labelledby="step3Heading">
+        <div class="step-header">
+          <h2 class="step-heading" id="step3Heading">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Langkah 3: Status Bebas Pustaka
+          </h2>
+          <p class="step-desc" id="step3Desc">Berikut adalah hasil verifikasi status tanggungan dan penerbitan surat resmi Anda.</p>
+        </div>
+
+        <!-- Container ini akan diisi secara dinamis oleh js/app.js (Bebas / Ada Tanggungan) -->
+        <div id="resultContainer" class="result-card-container">
+          <!-- Placeholder akan dirender di sini -->
+        </div>
+
+        <!-- Tombol Aksi Bawah -->
+        <div style="margin-top: 1.5rem; text-align: center;">
+          <button type="button" class="btn btn-outline" id="btnResetWizard">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+            Kembali ke Formulir
+          </button>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer Institusi -->
+    <footer class="footer-institutional">
+      <p>© 2026 Kurikuratorium FPMIPA - Universitas Pendidikan Indonesia.</p>
+      <p style="margin-top: 0.25rem;">Gedung FPMIPA UPI, Jl. Dr. Setiabudi No. 229, Sukasari, Kota Bandung, Jawa Barat 40154</p>
+      <div class="footer-links">
+        <a href="https://fpmipa.upi.edu" target="_blank" rel="noopener noreferrer">Website FPMIPA</a>
+        <a href="https://perpustakaan.upi.edu" target="_blank" rel="noopener noreferrer">Perpustakaan Pusat UPI</a>
+        <a href="https://upi.edu" target="_blank" rel="noopener noreferrer">Portal UPI</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL POP-UP: ALASAN URGENSI / TERBIT ULANG-->
+  <!-- ========================================== -->
+  <div class="modal-backdrop" id="urgencyModal" role="dialog" aria-modal="true" aria-labelledby="urgencyModalTitle">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <div class="modal-title-group">
+          <h3 id="urgencyModalTitle">Surat Pernah Diterbitkan</h3>
+          <p>Konfirmasi Pengajuan Ulang Surat Bebas Pustaka</p>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <div class="urgency-alert-note" id="urgencyModalDetail">
+          Sistem mendeteksi bahwa Surat Keterangan Bebas Pinjam Pustaka atas NIM Anda telah pernah diterbitkan sebelumnya.
+        </div>
+
+        <div class="form-group" style="margin-bottom: 0;">
+          <label class="form-label" for="inputAlasanUrgensi">
+            Alasan Pengajuan Ulang / Kebutuhan Urgensi <span class="required">*</span>
+          </label>
+          <textarea id="inputAlasanUrgensi" class="form-textarea no-icon" rows="3" placeholder="Contoh: Dokumen cetak terdahulu hilang / pembaruan data untuk keperluan sidang yudisium..." required></textarea>
+          <p class="input-hint">Berikan alasan yang jelas (minimal 10 karakter) untuk pencatatan pada arsip perpustakaan.</p>
+          <span class="form-error-msg" id="errorUrgensi">Alasan wajib diisi minimal 10 karakter.</span>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" id="btnCancelUrgency">Batal</button>
+        <button type="button" class="btn btn-primary" id="btnConfirmUrgency">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Kirim Pengajuan Ulang
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- EXPLICIT VISUAL LOADING OVERLAY            -->
+  <!-- ========================================== -->
+  <div class="loading-overlay" id="loadingOverlay" role="alert" aria-busy="false" aria-live="polite">
+    <div class="loading-content">
+      <div class="spinner-modern"></div>
+      <h3 class="loading-title" id="loadingTitle">Memproses Permohonan...</h3>
+      <p class="loading-desc" id="loadingDesc">Sedang menghubungkan ke server Kurikuratorium FPMIPA dan memeriksa database tanggungan buku...</p>
+    </div>
+  </div>
+
+  <!-- Main JavaScript App (ES6 Module) -->
+  <script type="module" src="js/app.js"></script>
+
+</body>
+</html>
